@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# LaTeX temporary files
+*.aux
+*.log
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.toc
+*.lof
+*.lot
