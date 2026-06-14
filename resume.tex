@@ -1,0 +1,286 @@
+%-------------------------
+% Rezume, a latex resume template for developers
+% Author : Nanu Panchamurthy
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+
+% Hope this resume template helps you land an awesome job. If you found this helpful, please consider starring the github repo here, .
+%-------------------------
+
+
+
+%------------PACKAGES----------------
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{verbatim} % reimplements the "verbatim" and "verbatim*" environments
+
+\usepackage{titlesec} % provides an interface to sectioning commands i.e. custom elements
+
+\usepackage{color} % provides both foreground and background color management
+
+\usepackage{enumitem} % provides control over enumerate, itemize and description
+
+\usepackage{fancyhdr} % provides extensive facilities for constructing headers, footers and also controlling their use
+
+\usepackage{tabularx} % defines an environment tabularx, extension of "tabular" with an extra designator x, paragraph like column whose width automatically expands to fill the width of the environment
+
+\usepackage{latexsym} % provides mathematical symbols
+
+\usepackage{marvosym} % provides martin vogel's symbol font which contains various symbols
+
+\usepackage[empty]{fullpage} % sets margins to one inch and removes headers, footers etc..
+
+\usepackage[hidelinks]{hyperref} % removes color and shadow of hyperlinks
+
+\usepackage[normalem]{ulem} % provides "\ul" (uline) command which will break at line breaks
+
+\usepackage[english]{babel} % provides culturally determined typographical rules for wide range of languages
+
+\usepackage{fontawesome5}
+%-----------------------------------------
+
+\input glyphtounicode % converts glyph names to unicode
+\pdfgentounicode=1 % ensures pdfs generated are ats readable
+
+%----------FONT OPTIONS-------------------
+\usepackage[default]{sourcesanspro} % uses the font source sans pro
+\urlstyle{same} % changes url font from default urlfont to font being used by the document
+%-----------------------------------------
+
+
+%----------MARGIN OPTIONS-----------------
+\pagestyle{fancy} % set page style to one configured by fancyhdr
+\fancyhf{} % clear all header and footer fields
+
+\renewcommand{\headrulewidth}{0in} % sets thickness of linerule under header to zero
+\renewcommand{\footrulewidth}{0in} % sets thickness of linerule over footer to zero
+
+\setlength{\tabcolsep}{0in} % sets thickness of column separator in tables to zero
+
+% origin of the document is one inch from the top and from and the left
+% oddsidemargin and evensidemargin both refer to the left margin
+% right margin is indirectly set using oddsidemargin
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\topmargin}{-0.5in}
+
+\addtolength{\textwidth}{1.0in} % sets width of text area in the page to one inch
+\addtolength{\textheight}{1.0in} % sets height of text area in the page to one inch
+
+\raggedbottom{} % makes all pages the height of current page, no extra vertical space added
+\raggedright{} % makes all pages the width of current page, no extra horizontal space added
+%------------------------------------------
+
+
+%--------SECTIONING COMMANDS---------
+% \titleformat{<command>}
+%   [<shape>]{<format>}{<label>}{<sep>}
+%     {<before-code>}[<after-code>]
+
+% command is the sectioning command to be redefined
+% shape is the style of the font; scshape stands for small caps style
+% format is the format to be applied to whole title- label and text; absent here
+% label defines the label
+% sep is the horizontal separation between label and title body
+% before-code is the code to be executed before
+% after-code is the code to be executed after
+
+\titleformat{\section}
+  {\scshape\large}{}
+    {0em}{\color{blue}}[\color{black}\titlerule\vspace{0pt}]
+%-------------------------------------
+
+
+%--------REDEFINITIONS----------------
+% redefines the style of the bullet point
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+% redefines the underline depth to 2pt
+\renewcommand{\ULdepth}{2pt}
+%-------------------------------------
+
+
+%--------CUSTOM COMMANDS--------------
+%\vspace{} defines a vertical space of given size, modifying this in custom commands can help stretch or shrink resume to remove or add content
+
+% resumeItem renders a bullet point
+\newcommand{\resumeItem}[1]{
+  \item\small{#1}
+}
+
+% commands to start and end itemization of resumeItem, rightmargin set to 0.11in to avoid the overflow of resumetItem beyond whatever resumeItemHeading is being used
+\newcommand{\resumeItemListStart}{\begin{itemize}[rightmargin=0.11in]}
+\newcommand{\resumeItemListEnd}{\end{itemize}}
+
+% resumeSectionType renders a bolded type to be used under a section, used as skill type here, middle element is used to keep ":"s in the same vertical line
+\newcommand{\resumeSectionType}[3]{
+  \item\begin{tabular*}{0.96\textwidth}[t]{
+    p{0.15\linewidth}p{0.02\linewidth}p{0.81\linewidth}
+  }
+    \textbf{#1} & #2 & #3
+  \end{tabular*}\vspace{-2pt}
+}
+
+% resumeTrioHeading renders three elements in three columns with second element being italicized and first element bolded, can be used for projects with three elements
+\newcommand{\resumeTrioHeading}[3]{
+  \item\small{
+    \begin{tabular*}{0.96\textwidth}[t]{
+      l@{\extracolsep{\fill}}c@{\extracolsep{\fill}}r
+    }
+      \textbf{#1} & \textit{#2} & #3
+    \end{tabular*}
+  }
+}
+
+% resumeQuadHeading renders four elements in a two columns with the second row being italicized and first element of first row bolded, can be used for experience and projects with four elements
+\newcommand{\resumeQuadHeading}[4]{
+  \item
+  \begin{tabular*}{0.96\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & #2 \\
+    \textit{\small#3} & \textit{\small #4} \\
+  \end{tabular*}
+}
+
+% resumeQuadHeadingChild renders the second row of resumeQuadHeading, can be used for experience if different roles in the same company need to added
+\newcommand{\resumeQuadHeadingChild}[2]{
+  \item
+  \begin{tabular*}{0.96\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{\small#1} & {\small#2} \\
+  \end{tabular*}
+}
+
+% commands to start and end itemization of resumeQuadHeading, lefmargin for left indent of 0.15in for resumeItems
+\newcommand{\resumeHeadingListStart}{
+  \begin{itemize}[leftmargin=0.15in, label={}]
+}
+\newcommand{\resumeHeadingListEnd}{\end{itemize}}
+%-------------------------------------------
+
+
+%__________________RESUME____________________
+% You can rearrange sections in any order you may prefer
+\begin{document}
+
+%-----------CONTACT DETAILS------------------
+% Make sure all the details are correct, you can add more links in the first row of second column if needed
+
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lr}
+{\LARGE\textbf{Muhammad Hamza Mahmood}} &
+\href{https://linkedin.com/in/muhammad-hamza-mahmood}{\faLinkedin\ LinkedIn}
+\;|\;
+\href{https://github.com/hamza5999}{\faGithub\ GitHub}
+\end{tabular*}
+
+{\large Senior Software Engineer}\\[0.25cm]
+
+\faMobile\ \hspace{0.1cm}(+92) 3057267195
+\quad | \quad
+\faEnvelope\ \hspace{0.1cm}mhamzamahmood5@gmail.com
+\quad | \quad
+\faMapMarker*\ \hspace{0.1cm}Faisalabad, Pakistan
+%--------------------------------------------
+
+
+%-----------SUMMARY--------------------------
+% Keep this short, simple and straigth to point
+
+\section{Professional Summary}
+\small{
+  Senior Software Engineer with \textbf{4 years} of experience building scalable \textbf{SaaS and InsurTech} platforms using \textbf{Ruby on Rails and Next.js}. Passionate about creating reliable software, simplifying complex workflows, and delivering practical technical solutions that support \textbf{business growth}.
+}
+%--------------------------------------------
+
+%-----------EXPERIENCE-----------------------
+% Distill all your talking points to small bullet points which follow the pattern "challenge-action-result" for maximum efficiency. Try to quantify (use numbers) your points whenver possible, highlist words of importance
+
+\section{Experience}
+\resumeHeadingListStart{}
+  \resumeQuadHeading{Senior Software Engineer}{Jan 2025 -- Present}
+  {DevDen}{Onsite -- Faisalabad, Pakistan}
+    \resumeItemListStart{}
+      \resumeItem{Collaborate with product stakeholders and engineering teams to design and deliver \textbf{scalable product solutions.}}
+      \resumeItem{Contribute to \textbf{software architecture} and design decisions with a focus on performance and maintainability.}
+      \resumeItem{Present \textbf{technical proposals} in engineering forums, improving product design and development workflows.}
+      \resumeItem{Develop product features across \textbf{frontend and backend applications}, improving performance and usability.}
+    \resumeItemListEnd{}
+
+  \resumeQuadHeading{Software Engineer}{Jul 2022 -- Jan 2025}
+  {DevDen}{Onsite -- Faisalabad, Pakistan}
+    \resumeItemListStart{}
+      \resumeItem{Developed backend modules and \textbf{REST APIs} for scalable workflow automation and system integrations.}
+      \resumeItem{Designed database schemas and optimized \textbf{data models} for performance, integrity, and maintainability.}
+      \resumeItem{Integrated \textbf{third party services} and cloud storage solutions while supporting production deployments.}
+      \resumeItem{Built \textbf{frontend components} and user interfaces, improving usability and application responsiveness.}
+    \resumeItemListEnd{}
+\resumeHeadingListEnd{}
+%---------------------------------------------
+
+
+%-----------PROJECTS--------------------------
+% Use resumeQuadHeading if four elements are feasible (ex: demo video link), else use resumeTrioHeading. Keep the bullet points simple and concise and try to cover wide variety of skills you have used to build these projects
+
+\section{Projects}
+\resumeHeadingListStart{}
+
+\resumeQuadHeading
+{Navigate}
+{Mar 2025 -- Present}
+{Underwriting \& Risk Management Platform}
+{}
+
+\resumeItemListStart{}
+\resumeItem{Designed \textbf{underwriting workflows} supporting risk evaluation, audit tracking, and decision support.}
+\resumeItem{Implemented \textbf{OCR-based document extraction} to automate data ingestion and underwriting recommendations.}
+\resumeItem{Developed \textbf{product features} across frontend and backend applications for underwriting and submission workflows.}
+\resumeItemListEnd{}
+
+\resumeQuadHeading
+{AppEase}
+{Dec 2023 -- Mar 2025}
+{Insurance Submission Workflow Platform}
+{}
+
+\resumeItemListStart{}
+\resumeItem{Implemented \textbf{RBAC and collaborator permissions} for multi-user access control on submission records.}
+\resumeItem{Redesigned \textbf{submission workflows} and frontend components, improving usability and overall user experience.}
+\resumeItem{Refactored \textbf{legacy modules} and optimized database queries to improve application performance and efficiency.}
+\resumeItemListEnd{}
+
+\resumeQuadHeading
+{Karibu}
+{Apr 2023 -- Dec 2023}
+{Rider \& Shift Management Platform}
+{}
+
+\resumeItemListStart{}
+\resumeItem{Designed \textbf{database schemas} and data models for rider scheduling and shift allocation.}
+\resumeItem{Developed \textbf{backend modules and APIs} for rider scheduling, shift allocation, and rider management.}
+\resumeItem{Deployed and maintained applications using \textbf{Dokku} on DigitalOcean \textbf{Droplets} with DigitalOcean \textbf{Spaces} integration.}
+\resumeItemListEnd{}
+
+\resumeHeadingListEnd{}
+
+%--------------------------------------------
+
+%--------------SKILLS------------------------
+% Add or remove resumeSectionTypes according to your needs
+
+\section{Technical Skills}
+  \resumeHeadingListStart{}
+    \resumeSectionType{Frontend}{:}{Next.js, TypeScript, JavaScript, Tailwind CSS}
+    \resumeSectionType{Backend}{:}{Ruby on Rails, REST APIs, Schema Design, Workflow Design and Automation}
+    \resumeSectionType{Architecture}{:}{System Design, Application Scalability, Application Performance Optimization}
+  \resumeHeadingListEnd{}
+%--------------------------------------------
+
+
+%-----------EDUCATION-------------------------
+% Mention your CGPA, if its good, in the first row of second column
+
+\section{Education}
+  \resumeHeadingListStart{}
+    \resumeQuadHeading{National University of Computer and Emerging Sciences}{Pakistan}
+    {Bachelor of Science in Computer Science \;|\; CGPA: 3.12}{Aug 2018 -- Jun 2022}
+  \resumeHeadingListEnd{}
+%---------------------------------------------
+
+\end{document}
